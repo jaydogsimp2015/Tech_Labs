@@ -1,0 +1,22 @@
+2. Yes There's a windows updates status alarm
+
+3. 
+
+
+Top 100 busy/idle processors the Network Administrator will be able to tell which processors are being used the most and determine which ones will need to be replaced first
+
+   Top 100 Fastest/Slowest ping Sensors the Network Administrator would be able to tell which computers or servers have the Fastest/Slowest ping and determine if they need to be moved to a better location
+
+   Top 100 Free/FULL Disk space sensors the Network Administrator The Network Administrator can determine if more drives need to be added
+
+   Top 100 Most/Least used bandwidth sensors the Netwrok Administrator could tell how strong the bandwith and tell if a repeator or a switch needs to be added 
+
+   Top 100 Up/Downtime the Network Administrator can monitor if a system needs to be shutdown for maintenance and if a system needs to be powered back on.
+
+ 4. 17%
+
+ 5. 66%
+
+ 6. 43%
+
+ 

@@ -1,0 +1,44 @@
+1.
+  A. 192.168.0.101
+
+  B. PC1
+
+  C. 192.168.0.2
+
+  D. Server 1
+
+  E. I was able to determine it was TCP by looking at the section underneath the IP section.
+
+
+2.
+  A. 192.168.0.100
+
+  B. L1
+
+  C. 1025
+
+  D. 192.168.0.2
+
+  E. Server 1
+
+  F. 25
+
+  G. I was able to determine it was TCP by looking at the section underneath the IP section.
+
+  H. SMTP sends the email to the server with the destinations IP. Handles Outbound emails 	
+
+
+3.
+  A. 192.168.0.2
+
+  B. Server 1
+
+  C. 110
+
+  D. 192.168.0.101
+
+  E. PC1
+
+  F. 1025
+
+  G. POP3 Only downloads the contents in your inbox folder. POP3 Deletes email from server after the email is downloaded
