@@ -1,0 +1,17 @@
+#1.  TCP
+
+#2.  Source Address 192.168.143.101
+
+     Destination Address 192.168.143.100
+
+#3.  HTTP Version 1.1
+
+
+#4.  Accept-Language: en-US,en;q=0.9
+
+
+#5.  Mon, 20 Mar 2023 20:44:50 GMT
+
+#6.  HTTP/1.1 200 OK
+
+#7.  Microsoft - IIS/10.0

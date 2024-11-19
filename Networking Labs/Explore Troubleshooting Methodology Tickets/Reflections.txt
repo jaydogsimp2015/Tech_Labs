@@ -1,0 +1,46 @@
+#1 Ticket A: no one was able to access the server so the problem has to be on the routers side or the servers side 
+   
+   Ticket B: acc2 cant access the server and the other devices can access the server so the problem is on acc2's side 
+
+   Ticket C: Op2 can't cennect to anything on the network so I can determine what the problem is by checking the connection
+   
+   Ticket D: Sales 3 can’t connect to anyone on the network again I determined the issue is sales 3 connection to the switch
+
+
+
+
+#2 Ticket A: The entire network was being affected
+   
+   Ticket B: Acc2 was the only workstation affected 
+  
+   Ticket c: Ops2 is the only Work station affect
+
+   Ticket D: Sales 3 Work station was affected
+
+
+
+#3 Ticket A: The switch port connected to the server from the central router was turned off 
+   
+   Ticket B: The settings in acc2's work station NIC was changed from DHCP to static   
+
+   Ticket C: The Nic was removed from op2's work station 
+   
+   Ticket D: The port that sales 3 connects to on the switch was turned off  
+
+
+
+
+#4 Layer 1 , 2 and 3 of the TCP/IP suite 
+
+#5  As a IT enrty level technician, my responsibilities would be more related to the helpdesk side of things like computer hardware,
+    software, peripheral, anti-virus/malware as opposed to network administration so at most I might be able to check the connection
+    between the data drop (ethernet wallplate and the pc to ensure the connecion is good there). If it is and I didn't detect malware
+    of any kind, I'd escalate to the network administrator. 
+  
+
+
+#6 It made more sense to complete ticket A first because the problem was more severe due to it affecting access to the server for all devices
+
+#7 Yes due the process of elimination and the information provided in the tickets I was able successfully figure out which layer was being affected 
+
+#8 Ticket A : Due to no one being able to access the server I determined it was a layer 1 (physical) issue and was the connection between the server and the router after taking a look at the connection on the router I saw the switch port had been turned off not allowing a connection between the router and the server. 
