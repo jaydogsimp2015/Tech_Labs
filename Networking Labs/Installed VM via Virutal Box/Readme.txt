@@ -1,0 +1,2 @@
+In this lab I created a Virutal Machine and installed windows server 2019 using Oracle Virutal box Type 2 HyperVisor.
+After installing the two Vms I then joined the host to the Domain I created on the server Vm
