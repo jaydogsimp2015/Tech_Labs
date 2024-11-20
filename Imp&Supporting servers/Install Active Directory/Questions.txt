@@ -1,0 +1,17 @@
+Q#1 NetBIOS domain:   TXRIG-JS
+
+
+Q#2 Data Base Folder C:\Windows\NTDS
+    
+    Log files Folder C:\Windows\NTDS
+
+    SYSVOL Folder    C:\Windows\SYSVOL
+
+
+Q#3 FQDN: SRV19-JS.TxRig-JS.local
+
+Q#4 A Local Server: System and Application Events windows Time services ,Perflib, remote management, DNS Client, Complus
+
+    B AD DS: Consist of Active Directory Events DFS replication, Directory Service , DNS Server, AD Web services
+  
+    C DNS: DNS server Events DNS Server Service 

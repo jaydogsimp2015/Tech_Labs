@@ -1,0 +1,1 @@
+1. By default the Administrator has permissions to remote desktop

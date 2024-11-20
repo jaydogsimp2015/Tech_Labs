@@ -1,0 +1,29 @@
+Q2. AMD Ryzen 3700x
+
+Q3. Windows Server 2019 Standard
+
+Q5. Programs 
+    Hardware and Sound
+    Network and Internet
+    System and Security
+
+Q7. Normal Start Up 
+     Loads all device drivers and services 
+    
+    Diagnostic Startup
+     Load basic devices and services only 
+    
+    Selective Startup 
+     Load System services
+     Load startup items
+     Use orginal boot configuration 
+
+Q8. Safe Boot 
+    No Gui Boot
+    Boot Log
+    Base Video
+    OS boot information 
+    
+Q14. 192.168.1.254
+
+Q15. 22
