@@ -1,0 +1,8 @@
+#1  The purpose of this lab is to demonstrate how to connect muliple servers to one domain and to show how to duplicate/clone,and receive a new SID. This helps me get prepared for a job in the tech industry because bigger companies have more then one servers connected to a single Domain. 
+
+
+#2   When a ran SYSPrep the server was provided with a new SID.
+
+
+#3   implementing a read-only copy of Active Directory is useful in scenarios where you want to provide high availability to your AD infrastructure or if you want to offload some of the read traffic from your primary domain controller. In a highly regulated environment where audit requirements dictate all changes to the AD must be logged and verified. A write-only copy of AD can be used to enforce a strict separation of duties between administrators 
+      

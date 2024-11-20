@@ -1,0 +1,6 @@
+#1  You can configure settings that will enforce the company policies. For example, you can use the "Password Policy" setting to enforce a password complexity policy.
+   
+    You can Apply different policies on separate OU's as well as specific users.
+   
+
+#2 I Had No problems the instructions were well thoughtout and descriptive 

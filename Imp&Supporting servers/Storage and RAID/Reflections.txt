@@ -1,0 +1,3 @@
+#1 No it is not if one volume is deleted all data is lost
+
+#2 Hardware Raid usually cost more but my offer best performance 

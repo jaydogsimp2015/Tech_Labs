@@ -1,0 +1,6 @@
+#1  A. The Purpose of the Minimum password age is to limit the amount of time thst must pass before a user can reset their password again.
+ 
+    B. The Purpose of Enfoce Passowrd History is so the user does not use the same pasword over and over again it also increases security
+
+#2  The reason we force lock screen after a specific amount of inactivity is to protect security and privacy of the user and their data
+ 
