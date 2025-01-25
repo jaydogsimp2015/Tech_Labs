@@ -1,0 +1,41 @@
+# Step 1:
+
+sudo nano /etc/pam.d/sshd
+
+# Step 2: Place the following code at the end of the file :
+
+session optional pam_exec.so /usr/bin/ntfy-ssh-login.sh 
+
+# Step 3: 
+
+sudo nano /usr/bin/ntfy-ssh-login.sh
+
+# Step 4: Place the following code :
+
+#!/bin/bash
+
+TIMESTAMP=$(date '+%I:%M %p %m-%d-%Y') #sets the variable for time & date
+
+if [ "${PAM_TYPE}" = "open_session" ]; then
+  curl \
+    -H prio:high \
+    -H tags:warning \
+    -d "SSH login: ${PAM_USER} from ${PAM_RHOST} at ${TIMESTAMP}" \
+    https://ntfy-server/SSH-LOGIN
+fi
+
+if [ "${PAM_TYPE}" = "close_session" ]; then
+  curl \
+    -H prio:high \
+    -H tags:warning \
+    -d "SSH logout: from ${PAM_USER} ${PAM_RHOST} at ${TIMESTAMP}" \ 
+    https://ntfy-server/SSH-LOGIN
+fi 
+
+# this will let you receive notifications when a ssh session is started and ended along with the time, date and IP address of the Accessor
+
+# Step 5: Ensure the file is executable with this command : 
+
+chmod +x /usr/bin/ntfy-ssh-login.sh
+
+# Step 6: Save and exit
