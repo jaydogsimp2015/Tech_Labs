@@ -1,0 +1,72 @@
+**Expanding a Virtual Disk in Proxmox and Resizing the Filesystem**
+
+If you have expanded a virtual disk in Proxmox but your partition is still showing the old size, follow these steps to extend the partition and filesystem without rebooting.
+
+---
+
+### **Step 1: Verify the Current Disk and Partition Size**
+Before making changes, check the current size of the disk and partitions:
+```bash
+lsblk
+```
+Check the filesystem type:
+```bash
+df -Th
+```
+Look for `/dev/sda2` and confirm that it is an **ext4** partition.
+
+---
+
+### **Step 2: Extend the Partition**
+Since your disk (`/dev/sda`) has been expanded in Proxmox but the partition (`/dev/sda2`) is still smaller, extend it with:
+```bash
+growpart /dev/sda 2
+```
+This command resizes the partition to use the available space on the disk.
+
+---
+
+### **Step 3: Resize the Filesystem**
+After resizing the partition, extend the filesystem so it can use the new space. Since `/dev/sda2` is formatted as **ext4**, use:
+```bash
+resize2fs /dev/sda2
+```
+This will expand the filesystem to fill the resized partition.
+
+---
+
+### **Step 4: Verify the New Size**
+Check if the partition has been extended successfully:
+```bash
+df -h
+```
+You should now see `/dev/sda2` using the full allocated space.
+
+---
+
+### **Example Before & After**
+#### **Before Expansion:**
+```
+/dev/sda      96G  0 disk
+├─/dev/sda1    1M  0 part
+└─/dev/sda2   32G  0 part  ext4
+```
+#### **After Expansion:**
+```
+/dev/sda      96G  0 disk
+├─/dev/sda1    1M  0 part
+└─/dev/sda2   96G  0 part  ext4
+```
+
+---
+
+### **Troubleshooting**
+- If `growpart` is not found, install `cloud-utils-growpart`:
+  ```bash
+  apt install cloud-guest-utils
+  ```
+- If `resize2fs` fails, ensure the partition is not mounted as read-only.
+- If using **LVM**, additional steps may be required to resize the logical volume (`lvextend`).
+
+Now your VM's disk is fully expanded without requiring a reboot! 🚀
+
