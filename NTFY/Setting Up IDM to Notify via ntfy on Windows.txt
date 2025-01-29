@@ -1,0 +1,81 @@
+# Setting Up IDM to Notify via ntfy on Windows
+
+## 1. Use IDM's "Run on Completion" Feature (via IDM Scheduler)
+
+Since IDM doesn’t have an Events tab, you can use its **Scheduler** to automate a task when the downloads are completed.
+
+### Steps:
+1. **Open IDM**.
+2. Go to **Downloads** > **Scheduler** (or **Tasks** > **Scheduler**).
+3. In the **Scheduler**, click **Add** to create a new task.
+4. Set the task to run at a certain time, like **after your downloads typically finish** (or set a frequent interval for checking completed downloads).
+5. **In the "Action" field**, choose **"Run a Program"** and enter the path to a batch or Python script (see the next steps for script creation).
+
+## 2. Create the Notification Script
+
+### **Option A: Python Script (using `requests` library)**
+
+1. **Install Python** if you don’t have it:  
+   [Download Python](https://www.python.org/downloads/).
+   
+2. **Install the `requests` library** by running this command in Command Prompt:
+   --------------------------------------------------------------------------------------------------------------------------------------------------------------
+   pip install requests
+   
+
+3. **Create the Python script** (`notify_idm_finished.py`):
+
+   # python
+   import requests
+
+   def send_ntfy_notification(message):
+       ntfy_url = "https://ntfy.sh/idm-notifications"  # Replace with your ntfy topic or URL
+       payload = {'message': message}
+       requests.post(ntfy_url, data=payload)
+
+   send_ntfy_notification("IDM Download Queue Finished!")
+   
+
+4. Save it as `notify_idm_finished.py` in a folder like `C:\scripts`.
+
+### **Option B: Batch Script (using `curl`)
+
+If you prefer a batch script, you can use **curl** (you may need to install it if you don't already have it):
+
+1. Open **Notepad** and create this batch file:
+
+   ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+   curl -X POST -d "message=IDM Download Queue Finished!" https://ntfy.sh/idm-notifications
+   
+
+2. Save it as `notify_idm_finished.bat` in a folder like `C:\scripts`.
+
+## 3. Point IDM Scheduler to Your Script
+
+1. Open **IDM Scheduler**.
+2. Click **Add** to create a new task.
+3. Set the **Action** to **"Run a Program"**.
+4. Browse and select the Python script or batch script you just created.
+5. Set the **trigger** to when your downloads finish or at regular intervals.
+
+## 4. Subscribe to the ntfy Topic
+
+Make sure you’re subscribed to the **ntfy** topic to receive notifications:
+
+- **ntfy Web**: [https://ntfy.sh](https://ntfy.sh)
+- **ntfy App** (on Android/iOS): Subscribe to `idm-notifications`.
+
+## Alternative: Use Windows Task Scheduler
+
+If the **IDM Scheduler** doesn’t meet your needs, you can also use **Windows Task Scheduler**:
+
+1. **Open Windows Task Scheduler** by typing "Task Scheduler" in the Start menu.
+2. Click **Create Basic Task** and name it (e.g., "IDM Notification").
+3. Set the **Trigger** as **When a specific event is logged**.
+   - Look for the event ID that corresponds to **IDM download completion**.
+4. Under **Action**, set it to **Start a Program** and point to your Python or batch script.
+5. Finish and save the task.
+
+---
+
+With this setup, you should receive notifications on your phone via ntfy when your IDM queue is complete.
