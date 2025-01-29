@@ -1,0 +1,54 @@
+**Setting Up Cron Job for Apt Update and Notifications**
+
+# Description #
+This document provides steps to set up a cron job that performs an 'apt update' command 
+and sends notifications with a list of upgradable packages using ntfy. The cron job is set to 
+run daily at 1:20 PM.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+1. Setting Up the Cron Job
+To set up the cron job that runs 'apt update' and sends notifications using ntfy, 
+follow these steps:
+
+1. Open the crontab editor by running:
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    crontab -e
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+2. Add the following line to the crontab to run 'apt update' and send notifications with 
+    the list of upgradable packages:
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    20 13 * * * sudo apt update && sudo apt list --upgradable | curl -d "Upgradable packages: $(sudo apt list --upgradable)" https://ntfy.jakeshomelab.dev/Media-update
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+3. Save and exit the editor.
+    - In the editor, press `CTRL+O` to save and `ENTER` to confirm, then `CTRL+X` to exit.
+
+
+
+2. Allowing Sudo Commands to Run in Cron Jobs
+Since cron jobs run without any user interaction, you need to configure sudo to allow 
+    commands to run without requiring a password.
+    
+Follow these steps to allow `sudo` commands to run without a password prompt:
+    1. Open the sudoers file:
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    sudo visudo
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    2. Add the following line at the end of the file, replacing `yourusername` with your 
+    actual username:
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    yourusername ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/apt list
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    3. Save and exit:
+    - In the `visudo` editor, press `CTRL+O` to save, then `ENTER` to confirm.
+    - Press `CTRL+X` to exit the editor.
+    
+3. Verify that the sudo permissions work by running the following commands manually:
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    sudo apt update
+    sudo apt list --upgradable
+    --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    If these commands run without requiring a password, the setup is complete.
