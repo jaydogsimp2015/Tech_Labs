@@ -1,0 +1,62 @@
+# Setting Up Unattended Upgrades with sudo and ntfy Notifications #
+
+## Step 1: Install and Enable Unattended Upgrades
+Ensure that `unattended-upgrades` is installed and enabled:
+
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+-------------------------------------------------------------------------------------------------------
+
+## Step 2: Configure Unattended Upgrades for Security Updates Only
+Edit the unattended-upgrades configuration file:
+
+sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+-------------------------------------------------------------------------------------------------------
+
+Modify the `Allowed-Origins` section to include only security updates:
+-------------------------------------------------------------------------------------------------------
+Unattended-Upgrade::Allowed-Origins {
+    "${distro_id}:${distro_codename}-security";
+    "${distro_id}ESMApps:${distro_codename}-apps-security";
+    "${distro_id}ESM:${distro_codename}-infra-security";
+};
+-------------------------------------------------------------------------------------------------------
+Save and exit.
+
+## Step 3: Schedule Unattended Upgrades with Cron
+Edit the root user's crontab:
+
+sudo crontab -e
+-------------------------------------------------------------------------------------------------------
+
+Add the following line to run unattended-upgrades daily at 3 AM:
+
+0 3 * * * unattended-upgrade
+-------------------------------------------------------------------------------------------------------
+
+## Step 4: Set Up ntfy Notifications
+To receive notifications when updates are installed, modify the unattended-upgrades configuration:
+
+sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+-------------------------------------------------------------------------------------------------------
+
+Add a post-install command:
+-------------------------------------------------------------------------------------------------------
+Unattended-Upgrade::Post-Install-Command {
+    "curl -d 'Unattended upgrades completed on $(hostname)' https://ntfy.sh/your_topic";
+};
+-------------------------------------------------------------------------------------------------------
+Replace `https://ntfy.sh/your_topic` with your actual **ntfy** topic.
+
+## Step 5: Test the Configuration
+Run a dry run to verify everything works:
+
+sudo unattended-upgrade --dry-run
+-------------------------------------------------------------------------------------------------------
+Check logs for any errors:
+
+sudo journalctl -u unattended-upgrades.service
+-------------------------------------------------------------------------------------------------------
+
+This setup ensures security updates are installed automatically and you receive notifications via ntfy.
+
