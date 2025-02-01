@@ -40,11 +40,9 @@ To receive notifications when updates are installed, modify the unattended-upgra
 sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
 -------------------------------------------------------------------------------------------------------
 
-Add a post-install command:
+Add a post-install command to crontab -e:
 -------------------------------------------------------------------------------------------------------
-Unattended-Upgrade::Post-Install-Command {
-    "curl -d 'Unattended upgrades completed on $(hostname)' https://ntfy.sh/your_topic";
-};
+sudo unattended-upgrade && curl -d 'Security upgrades completed' https://ntfy.yourserver/yourtopic
 -------------------------------------------------------------------------------------------------------
 Replace `https://ntfy.sh/your_topic` with your actual **ntfy** topic.
 
