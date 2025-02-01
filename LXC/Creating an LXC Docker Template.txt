@@ -1,0 +1,98 @@
+# Creating an LXC Docker Template
+
+## Step 1: Download Debian LXC Template
+
+### 1. Log in to the Proxmox VE (PVE) Console
+### 2. Update the available templates list:
+   
+   pveam update
+   ```
+### 3. Check available templates:
+   
+   pveam available
+   ```
+### 4. Find and copy the name of the template you want.
+   - I use **Debian TurnKey Core**.
+### 5. Download the template:
+   
+   pveam download <your-storage> <template-name>
+   ```
+   - Example:
+     
+     pveam download local debian-11-turnkey-core_17.1-1_amd64.tar.gz
+     ```
+### 6. Verify that the template is in your storage.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Step 2: Create LXC Template
+
+These settings can be changed when cloning, but for my setup:
+
+- **CT ID**: (your Choice)
+- **Hostname**: `template`
+- **Password**: (Your Choice)
+- **Template**: Select the LXC template you downloaded.
+- **Disk**: 32GB (your choice)
+- **CPU**: 1 Core (you choice)
+- **Memory**: 512MB RAM (min/max 512MB) (your choice)
+- **Network**: DHCP or Static IP (your choice)
+- **DNS**: 1.1.1.1, 8.8.8.8 (your choice)
+
+Then, **Finish** the setup.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Step 3: Setup & Install Docker
+
+### 1. Start the LXC container.
+### 2. Initial setup: (the Following are my reccomendations you can Select what you want )
+   - Skip TurnKey initialization.
+   - Skip email setup.
+   - Install security updates.
+   - Restart the container.
+### 3. Install Docker Compose using DB Tech’s script:
+   
+   git clone https://github.com/dnburgess/dockerinstall.git
+   ```
+### 4. Navigate to the directory:
+   
+   cd dockerinstall
+   ```
+### 5. Choose the version you want (see [DockerInstall GitHub](https://github.com/dnburgess/dockerinstall) for details).
+### 6. Make the script executable:
+   
+   sudo chmod +x <script-name>
+   ```
+### 7. Run the script:
+   
+   ./<script-name>
+   ```
+### 8. Follow the script and answer the prompts.
+### 9. Install additional dependencies:
+   *(all your choices read carefully)*
+### 10. Verify Docker installation by accessing the service via IP and the correct port.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Step 4: Clone & Final Setup
+
+# These are my steps personal steps you may skip to number 4. if you would not like to take these steps.  
+### 1. Set up **SSH notifications with NTFY**:
+   - [SSH Log Alerts](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/SSH_Log_Alerts)
+### 2. Set up **automatic security updates**:
+   - [Unattended Upgrades with NTFY](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/Setting%20Up%20Unattended%20Upgrades%20with%20sudo%20and%20ntfy%20Notifications.txt)
+### 3. Set up **automatic APT updates** with Crontab:
+   - [Cron Job for APT Update & Notifications](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/Setting%20Up%20Cron%20Job%20for%20Apt%20Update%20and%20Notifications.txt)
+
+### 4. Shutdown the LXC container:
+   
+   shutdown -h now
+   ```
+### 5. Clone the container (I don’t create templates since they lock resource editing).
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This guide provides a simple yet effective way to create an LXC container for Docker use within Proxmox VE.
+
