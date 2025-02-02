@@ -23,33 +23,53 @@ Unattended-Upgrade::Allowed-Origins {
 -------------------------------------------------------------------------------------------------------
 Save and exit.
 
-## Step 3: Schedule Unattended Upgrades with Cron
-Edit the root user's crontab:
+## Step 3: Schedule Unattended Upgrades with Crontab
+
+Edit the user's crontab:
 
 sudo crontab -e
 -------------------------------------------------------------------------------------------------------
 
 Add the following line to run unattended-upgrades daily at 3 AM:
 
-0 3 * * * unattended-upgrade
+0 3 * * * sudo unattended-upgrade
 -------------------------------------------------------------------------------------------------------
 
-## Step 4: Set Up ntfy Notifications
-To receive notifications when updates are installed, modify the unattended-upgrades configuration:
+## Step 4: Set Up with ntfy Notifications
 
-sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+Place in crontab -e Replace `https://ntfy.sh/your_topic` with your actual **ntfy** topic.
+0 3 * * * sudo unattended-upgrade && curl -d 'Security upgrades completed' https://ntfy.yourserver/yourtopic
 -------------------------------------------------------------------------------------------------------
 
-Add a post-install command to crontab -e:
--------------------------------------------------------------------------------------------------------
-sudo unattended-upgrade && curl -d 'Security upgrades completed' https://ntfy.yourserver/yourtopic
--------------------------------------------------------------------------------------------------------
-Replace `https://ntfy.sh/your_topic` with your actual **ntfy** topic.
+## Step 5: Allowing Sudo Command to Run in Cron Jobs
 
-## Step 5: Test the Configuration
+Since cron jobs run without any user interaction, you need to configure sudo to allow
+commands to run without requiring a password.
+
+Follow these steps to allow sudo commands to run without a password prompt:
+
+Open the sudoers file:
+
+sudo visudo
+
+Add the following line at the end of the file, replacing yourusername with your
+actual username:
+
+yourusername ALL=(ALL) NOPASSWD: /usr/bin/unattended-upgrade
+
+Save and exit:
+
+In the visudo editor, press CTRL+O to save, then ENTER to confirm.
+
+Press CTRL+X to exit the editor.
+
+
+
+-------------------------------------------------------------------------------------------------------
+## Step 6: Test the Configuration
 Run a dry run to verify everything works:
 
-sudo unattended-upgrade --dry-run
+sudo unattended-upgrade --dry-run && curl -d 'Security upgrades completed' https://ntfy.yourserver/yourtopic
 -------------------------------------------------------------------------------------------------------
 Check logs for any errors:
 
