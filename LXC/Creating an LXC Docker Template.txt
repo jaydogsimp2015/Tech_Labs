@@ -2,7 +2,7 @@
 
 ## Step 1: Download Debian LXC Template
 
-### 1. Log in to the Proxmox VE (PVE) Console
+ ### 1. Log in to the Proxmox VE (PVE) Console
 ### 2. Update the available templates list:
    
    pveam update
@@ -27,19 +27,19 @@
 
 ## Step 2: Create LXC Template
 
-These settings can be changed when cloning, but for my setup:
+ These settings can be changed when cloning, but for my setup:
 
-- **CT ID**: (your Choice)
-- **Hostname**: `template`
-- **Password**: (Your Choice)
-- **Template**: Select the LXC template you downloaded.
-- **Disk**: 32GB (your choice)
-- **CPU**: 1 Core (you choice)
-- **Memory**: 512MB RAM (min/max 512MB) (your choice)
-- **Network**: DHCP or Static IP (your choice)
-- **DNS**: 1.1.1.1, 8.8.8.8 (your choice)
+ - **CT ID**: (your Choice)
+ - **Hostname**: `template`
+ - **Password**: (Your Choice)
+ - **Template**: Select the LXC template you downloaded.
+ - **Disk**: 32GB (your choice)
+ - **CPU**: 1 Core (you choice)
+ - **Memory**: 512MB RAM (min/max 512MB) (your choice)
+ - **Network**: DHCP or Static IP (your choice)
+ - **DNS**: 1.1.1.1, 8.8.8.8 (your choice)
 
-Then, **Finish** the setup.
+ Then, **Finish** the setup.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -78,16 +78,19 @@ Then, **Finish** the setup.
 ## Step 4: Clone & Final Setup
 
 # These are my steps personal steps you may skip to number 4. if you would not like to take these steps.  
-### 1. Set up **SSH notifications with NTFY**:
+ ### 1. Set up **SSH notifications with NTFY**:
    - [SSH Log Alerts](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/SSH_Log_Alerts)
-### 2. Set up **automatic security updates**:
-   - [Unattended Upgrades with NTFY](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/Setting%20Up%20Unattended%20Upgrades%20with%20sudo%20and%20ntfy%20Notifications.txt)
-### 3. Set up **automatic APT updates** with Crontab:
-   - [Cron Job for APT Update & Notifications](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/Setting%20Up%20Cron%20Job%20for%20Apt%20Update%20and%20Notifications.txt)
+
+ ### 2.Set up **automatic APT updates** with Crontab:
+   - [Cron Job for APT Update & Notifications](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/Setting%20Up%20Cron%20Job%20for%20Apt%20Update%20and%20Notifications.txt) 
+
+
+ ### 3. Set up **automatic security updates**:
+   - [Unattended Upgrades with NTFY](https://github.com/jaydogsimp2015/Tech_Labs/blob/main/NTFY/Setting%20Up%20Unattended%20Upgrades%20with%20sudo%20and%20ntfy%20Notifications.txt) 
 
 ### 4. Shutdown the LXC container:
    
-   shutdown -h now
+   sudo shutdown now
    ```
 ### 5. Clone the container (I don’t create templates since they lock resource editing).
 
