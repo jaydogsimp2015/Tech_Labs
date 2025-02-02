@@ -15,12 +15,13 @@ sudo nano /usr/bin/ntfy-ssh-login.sh
 #!/bin/bash
 
 TIMESTAMP=$(date '+%I:%M %p %m-%d-%Y') #sets the variable for time & date
+HOSTNAME=$(hostname) # gets the system hostname
 
 if [ "${PAM_TYPE}" = "open_session" ]; then
   curl \
     -H prio:high \
     -H tags:warning \
-    -d "SSH login: ${PAM_USER} from ${PAM_RHOST} at ${TIMESTAMP}" \
+    -d "SSH login: ${PAM_USER} from ${PAM_RHOST} on ${HOSTNAME} at ${TIMESTAMP}" \
     https://ntfy-server/SSH-LOG
 fi
 
@@ -28,7 +29,7 @@ if [ "${PAM_TYPE}" = "close_session" ]; then
   curl \
     -H prio:high \
     -H tags:warning \
-    -d "SSH logout: from ${PAM_USER} ${PAM_RHOST} at ${TIMESTAMP}" \ 
+    -d "SSH logout: from ${PAM_USER} ${PAM_RHOST} on ${HOSTNAME} at ${TIMESTAMP}" \ 
     https://ntfy-server/SSH-LOG
 fi 
 
