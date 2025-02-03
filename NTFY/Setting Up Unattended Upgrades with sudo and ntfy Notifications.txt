@@ -38,7 +38,7 @@ Add the following line to run unattended-upgrades daily at 3 AM:
 ## Step 4: Set Up with ntfy Notifications
 
 Place in crontab -e Replace `https://ntfy.sh/your_topic` with your actual **ntfy** topic.
-0 3 * * * sudo unattended-upgrade && curl -d 'Security upgrades completed' https://ntfy.yourserver/yourtopic
+0 3 * * *  sudo unattended-upgrade && curl -d "$(hostname): Security upgrades completed" https://ntfy.jakeshomelab.dev/Media-update https://ntfy.yourserver/yourtopic
 -------------------------------------------------------------------------------------------------------
 
 ## Step 5: Allowing Sudo Command to Run in Cron Jobs
