@@ -1,0 +1,71 @@
+📌 Full Setup Guide for Regular Windows
+1️⃣ Ensure OpenSSH is Installed
+Open PowerShell as Administrator and check if OpenSSH is installed:
+Copy
+
+Get-WindowsFeature -Name OpenSSH*
+
+If it's not installed, install it:
+
+Copy
+
+Add-WindowsFeature -Name OpenSSH-Server
+Make sure the SSH service is running:
+
+Copy
+
+Get-Service -Name sshd
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+2️⃣ Create a PowerShell Script for ntfy Notifications
+Create a new file:
+C:\Path\To\ssh-log.ps1
+Copy and paste this script:
+
+# SSH Login Notification Script for ntfy
+$ntfyTopic = "https://ntfy.sh/YOUR_TOPIC"
+$hostname = $env:COMPUTERNAME
+$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$message = "SSH login detected on $hostname at $timestamp"
+
+# Send notification to ntfy
+Invoke-RestMethod -Uri $ntfyTopic -Method Post -Body $message
+Replace YOUR_TOPIC with your actual ntfy topic.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+3️⃣ Create a Scheduled Task for SSH Logins
+Open Task Scheduler (taskschd.msc).
+Click Create Task (not Basic Task).
+Under the General tab:
+Name it: SSH Login Alert
+Select Run with highest privileges
+Change Configure for to Windows 10 (or your Windows version).
+Go to the Triggers tab → Click New:
+Choose On an event
+Log: Security
+Source: Microsoft Windows security auditing
+Event ID: 4624 (Successful Logon)
+Go to the Actions tab → Click New:
+Action: Start a program
+Program/script: powershell.exe
+Add arguments:
+Copy
+
+-ExecutionPolicy Bypass -File "C:\Path\To\ssh-log.ps1"
+Click OK and Enable the task.
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+4️⃣ Test the Setup
+Log into Windows via SSH from another machine:
+sh
+Copy
+
+ssh username@your-windows-ip
+You should receive an ntfy notification.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+📤 Uninstallation
+To remove the scheduled task, run:
+
+Unregister-ScheduledTask -TaskName "SSH Login Alert" -Confirm:$false
+✅ Now, Windows will send an ntfy notification every time someone logs in via SSH. Let me know if you need any modifications! 🚀
