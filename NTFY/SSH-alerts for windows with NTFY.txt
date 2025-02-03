@@ -15,6 +15,30 @@ Make sure the SSH service is running:
 Copy
 
 Get-Service -Name sshd
+
+if that doesnt work try this 
+
+Check if OpenSSH is Installed Correctly
+Run the following in PowerShell (Admin):
+
+powershell
+Copy
+Edit
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+If OpenSSH is installed, you should see:
+
+yaml
+Copy
+Edit
+Name      : OpenSSH.Server~~~~0.0.1.0
+State     : Installed
+If it's not installed, install it using:
+
+powershell
+Copy
+Edit
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 2️⃣ Create a PowerShell Script for ntfy Notifications
