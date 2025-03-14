@@ -22,7 +22,7 @@ if [ "${PAM_TYPE}" = "open_session" ]; then
     -H prio:high \
     -H tags:warning \
     -d "SSH login: ${PAM_USER} from ${PAM_RHOST} on ${HOSTNAME} at ${TIMESTAMP}" \
-    https://ntfy-server/SSH-LOG
+    "https://ntfy-server/${HOSTNAME}"
 fi
 
 if [ "${PAM_TYPE}" = "close_session" ]; then
@@ -30,7 +30,7 @@ if [ "${PAM_TYPE}" = "close_session" ]; then
     -H prio:high \
     -H tags:warning \
     -d "SSH logout: from ${PAM_USER} ${PAM_RHOST} on ${HOSTNAME} at ${TIMESTAMP}" \ 
-    https://ntfy-server/SSH-LOG
+    "https://ntfy-server/${HOSTNAME}"
 fi 
 
 # this will let you receive notifications when a ssh session is started and ended along with the time, date and IP address of the Accessor

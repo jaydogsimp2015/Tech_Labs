@@ -63,9 +63,7 @@
 ### 6. Make the script executable:
    
    sudo chmod +x <script-name>
-   ```
-### 7. Run the script:
-   
+   ```   
    ./<script-name>
    ```
 ### 8. Follow the script and answer the prompts.
