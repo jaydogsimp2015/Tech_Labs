@@ -20,7 +20,7 @@ follow these steps:
 2. Add the following line to the crontab to run 'apt update' and send notifications with 
     the list of upgradable packages:
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     20 13 * * * sudo apt update && sudo apt list --upgradable | curl -d "$(hostname): Repo Updated here are all the Upgradable packages: $(sudo apt list --upgradable)" https://ntfy.yourserver.com/yourtopic
+     20 13 * * * sudo apt update && sudo apt list --upgradable | curl -d "$(hostname): Repo Updated here are all the Upgradable packages: $(sudo apt list --upgradable)" https://ntfy.yourserver.com/$(hostname)
     --------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 3. Save and exit the editor.
