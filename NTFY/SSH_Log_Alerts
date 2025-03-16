@@ -37,6 +37,6 @@ fi
 
 # Step 5: Ensure the file is executable with this command : 
 
-chmod +x /usr/bin/ntfy-ssh-login.sh
+sudo chmod +x /usr/bin/ntfy-ssh-login.sh
 
 # Step 6: Save and exit 
